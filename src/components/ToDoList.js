@@ -15,24 +15,30 @@ export const ToDoList = (props) => {
     const addToDo = (toDo) => updateList({...list, toDos: [...list.toDos, toDo]})
 
     const toDos = () => (
-        <ul>
+        <ul className="list-group">
             {list.toDos.map((toDo, index) => (
-                <li key={index}>
-                    <label>{`${toDo.name} Due Date: ${toDo.date}`}</label>
+                <li className="list-group-item" key={index}>
+                    <label> <b>To Do:</b> {toDo.name} <b>Due Date:</b> {toDo.date}</label>
                     <br></br>
-                    <button onClick={(e) => deleteTodo(toDo.id)}>X</button>
+                    <button className="btn btn-danger d-flex align-items-end" onClick={(e) => deleteTodo(toDo.id)}>Finished</button>
                 </li>
             ))}
         </ul>   
     );
 
     return(
-        <div>
-            <h2>{list.name}</h2>
-            {
-                toDos({ toDos, listId: list.id, deleteTodo})
-            }
-            <TodoForm addToDo={addToDo} />
+        <div className="row">
+            <div className="col">
+                <h2>{list.name}</h2>
+                {
+                    toDos({ toDos, listId: list.id, deleteTodo})
+                }
+            </div>
+            <div className="col">
+                <TodoForm addToDo={addToDo} />
+            </div>
+        
+            
         </div>
     );
 };
